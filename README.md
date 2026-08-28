@@ -6,6 +6,7 @@
 
 - [docs/WHY.md](docs/WHY.md) — 왜 만드는가, 하지 않을 것, v0 성공 판정
 - [docs/design.md](docs/design.md) — v0 범위, 데이터 모델, 파이프라인, 화면
+- [docs/scene-schema.md](docs/scene-schema.md) — 장면 파싱 VLM 계약 (초안, 검증 전)
 
 ## v0 한 줄 요약
 
@@ -13,5 +14,10 @@
 
 ## 착수 순서
 
-`docs/design.md` 하단 참조. 1번(누끼 손검증)과 2번(장면 파싱 스키마 고정)이
-플랫폼 선택(웹 우선 vs 네이티브 우선)의 선행 조건이다.
+`docs/design.md` 하단 참조. 플랫폼은 **iOS 네이티브 우선**으로 결정했다
+(누끼는 온디바이스 Vision, 장면 파싱만 백엔드 경유).
+
+남은 선행 작업 둘 다 실물 사진이 필요하다.
+
+1. 누끼 손검증 — 물건 10개로 카드 톤 확인
+2. 장면 파싱 검증 — 책상 사진 4장으로 `docs/scene-schema.md`의 합격선 측정
