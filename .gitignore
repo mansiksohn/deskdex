@@ -1,0 +1,23 @@
+node_modules/
+dist/
+build/
+.next/
+out/
+coverage/
+
+.env
+.env.*
+!.env.example
+
+.DS_Store
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-error.log*
+
+.venv/
+__pycache__/
+*.pyc
+
+# 실험용 사진 / 누끼 손검증 산출물
+scratch/
