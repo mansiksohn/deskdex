@@ -1,0 +1,286 @@
+{
+  "schema_version": "scene.v1",
+  "surface": {
+    "bbox": {
+      "x0": 0.0,
+      "y0": 0.215,
+      "x1": 1.0,
+      "y1": 0.8
+    },
+    "confidence": 0.98
+  },
+  "screen_regions": [
+    {
+      "bbox": {
+        "x0": 0.045,
+        "y0": 0.133,
+        "x1": 0.643,
+        "y1": 0.403
+      },
+      "kind": "monitor",
+      "confidence": 0.98
+    },
+    {
+      "bbox": {
+        "x0": 0.654,
+        "y0": 0.157,
+        "x1": 1.0,
+        "y1": 0.438
+      },
+      "kind": "laptop",
+      "confidence": 0.98
+    }
+  ],
+  "capture_quality": {
+    "angle": "top_down",
+    "surface_ratio": 0.65,
+    "position_confidence": 0.95,
+    "issues": []
+  },
+  "items": [
+    {
+      "id": "item_01",
+      "kind": "object",
+      "member_of": null,
+      "label": "레노버 노트북",
+      "label_confidence": 0.95,
+      "category": "device",
+      "distinguishing_features": "Lenovo 로고, Intel 스티커",
+      "bbox": {
+        "x0": 0.585,
+        "y0": 0.157,
+        "x1": 0.998,
+        "y1": 0.66
+      },
+      "crop_quality": 0.92,
+      "occlusion": 0.0,
+      "zone": "hot",
+      "support": "raised",
+      "sediment": {
+        "candidate": false,
+        "signals": [],
+        "confidence": 0.0
+      },
+      "member_count": 1,
+      "splittable": false,
+      "activity": ""
+    },
+    {
+      "id": "item_02",
+      "kind": "object",
+      "member_of": null,
+      "label": "검은색 와이드 모니터",
+      "label_confidence": 0.92,
+      "category": "display",
+      "distinguishing_features": "상단 시계 화면 표시",
+      "bbox": {
+        "x0": 0.045,
+        "y0": 0.133,
+        "x1": 0.643,
+        "y1": 0.403
+      },
+      "crop_quality": 0.95,
+      "occlusion": 0.0,
+      "zone": "warm",
+      "support": "desk",
+      "sediment": {
+        "candidate": false,
+        "signals": [],
+        "confidence": 0.0
+      },
+      "member_count": 1,
+      "splittable": false,
+      "activity": ""
+    },
+    {
+      "id": "item_03",
+      "kind": "object",
+      "member_of": null,
+      "label": "검은색 기계식 키보드",
+      "label_confidence": 0.95,
+      "category": "input",
+      "distinguishing_features": "주황색 키캡",
+      "bbox": {
+        "x0": 0.415,
+        "y0": 0.444,
+        "x1": 0.605,
+        "y1": 0.568
+      },
+      "crop_quality": 0.95,
+      "occlusion": 0.0,
+      "zone": "hot",
+      "support": "desk",
+      "sediment": {
+        "candidate": false,
+        "signals": [],
+        "confidence": 0.0
+      },
+      "member_count": 1,
+      "splittable": false,
+      "activity": ""
+    },
+    {
+      "id": "item_04",
+      "kind": "object",
+      "member_of": null,
+      "label": "민트색 주전자",
+      "label_confidence": 0.9,
+      "category": "drinkware",
+      "distinguishing_features": "민트색 도자기 재질",
+      "bbox": {
+        "x0": 0.293,
+        "y0": 0.497,
+        "x1": 0.391,
+        "y1": 0.597
+      },
+      "crop_quality": 0.9,
+      "occlusion": 0.0,
+      "zone": "warm",
+      "support": "desk",
+      "sediment": {
+        "candidate": false,
+        "signals": [],
+        "confidence": 0.0
+      },
+      "member_count": 1,
+      "splittable": false,
+      "activity": ""
+    },
+    {
+      "id": "item_05",
+      "kind": "object",
+      "member_of": null,
+      "label": "흰색 머그잔",
+      "label_confidence": 0.9,
+      "category": "drinkware",
+      "distinguishing_features": "찻잔 받침 위에 있음",
+      "bbox": {
+        "x0": 0.257,
+        "y0": 0.618,
+        "x1": 0.345,
+        "y1": 0.702
+      },
+      "crop_quality": 0.9,
+      "occlusion": 0.0,
+      "zone": "hot",
+      "support": "desk",
+      "sediment": {
+        "candidate": false,
+        "signals": [],
+        "confidence": 0.0
+      },
+      "member_count": 1,
+      "splittable": false,
+      "activity": ""
+    },
+    {
+      "id": "item_06",
+      "kind": "object",
+      "member_of": null,
+      "label": "드립 커피 드리퍼",
+      "label_confidence": 0.88,
+      "category": "drinkware",
+      "distinguishing_features": "종이 필터와 커피 가루",
+      "bbox": {
+        "x0": 0.147,
+        "y0": 0.497,
+        "x1": 0.247,
+        "y1": 0.638
+      },
+      "crop_quality": 0.88,
+      "occlusion": 0.0,
+      "zone": "warm",
+      "support": "desk",
+      "sediment": {
+        "candidate": false,
+        "signals": [],
+        "confidence": 0.0
+      },
+      "member_count": 1,
+      "splittable": false,
+      "activity": ""
+    },
+    {
+      "id": "item_07",
+      "kind": "object",
+      "member_of": null,
+      "label": "검은색 가방",
+      "label_confidence": 0.9,
+      "category": "carry",
+      "distinguishing_features": "스트랩",
+      "bbox": {
+        "x0": 0.0,
+        "y0": 0.742,
+        "x1": 0.238,
+        "y1": 1.0
+      },
+      "crop_quality": 0.8,
+      "occlusion": 0.2,
+      "zone": "hot",
+      "support": "off_desk",
+      "sediment": {
+        "candidate": false,
+        "signals": [],
+        "confidence": 0.0
+      },
+      "member_count": 1,
+      "splittable": false,
+      "activity": ""
+    },
+    {
+      "id": "item_08",
+      "kind": "cluster",
+      "member_of": null,
+      "label": "연필꽂이 및 도구모음",
+      "label_confidence": 0.8,
+      "category": "writing",
+      "distinguishing_features": "투명 컵 및 가위, 펜",
+      "bbox": {
+        "x0": 0.0,
+        "y0": 0.318,
+        "x1": 0.132,
+        "y1": 0.55
+      },
+      "crop_quality": 0.7,
+      "occlusion": 0.1,
+      "zone": "cold",
+      "support": "desk",
+      "sediment": {
+        "candidate": false,
+        "signals": [],
+        "confidence": 0.0
+      },
+      "member_count": 6,
+      "splittable": true,
+      "activity": "필기"
+    },
+    {
+      "id": "item_09",
+      "kind": "cluster",
+      "member_of": null,
+      "label": "우측 서류 및 책 뭉치",
+      "label_confidence": 0.85,
+      "category": "book",
+      "distinguishing_features": "세로로 꽂힌 서류철",
+      "bbox": {
+        "x0": 0.849,
+        "y0": 0.423,
+        "x1": 1.0,
+        "y1": 0.673
+      },
+      "crop_quality": 0.75,
+      "occlusion": 0.2,
+      "zone": "cold",
+      "support": "desk",
+      "sediment": {
+        "candidate": false,
+        "signals": [],
+        "confidence": 0.0
+      },
+      "member_count": 5,
+      "splittable": true,
+      "activity": "독서"
+    }
+  ],
+  "unparsed_regions": []
+}

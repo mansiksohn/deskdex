@@ -138,7 +138,11 @@ def postprocess(scene):
         b = it["bbox"]
         if not (b["x0"] < b["x1"] and b["y0"] < b["y1"]):
             dropped.append((it, "bbox 뒤집힘")); continue
-        if any(overlap_ratio(b, r["bbox"]) >= 0.70 for r in scene["screen_regions"]):
+        # display(모니터 자체)는 예외. 모니터의 bbox는 곧 자기 화면이라 겹침이
+        # 항상 100%에 가깝다 — "화면 속 내용"이 아니라 "모니터라는 물건"이다.
+        if it["category"] != "display" and any(
+            overlap_ratio(b, r["bbox"]) >= 0.70 for r in scene["screen_regions"]
+        ):
             dropped.append((it, "화면 영역")); continue
         if it["support"] == "off_desk":
             dropped.append((it, "책상 아님")); continue
