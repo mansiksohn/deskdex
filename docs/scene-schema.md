@@ -415,41 +415,62 @@ label_confidence를 정직하게 낮추는 편이 낫다.
 
 ## 8. 호출 형태
 
-```jsonc
-POST https://api.anthropic.com/v1/messages
-{
-  "model": "claude-opus-5",
-  "max_tokens": 16000,
-  "output_config": {
-    "format": { /* §2 스키마 */ }
-  },
-  "messages": [{
-    "role": "user",
-    "content": [
-      { "type": "image",
-        "source": { "type": "base64", "media_type": "image/jpeg", "data": "<b64>" } },
-      { "type": "text", "text": "이 책상 사진을 분석하라." }
-    ]
-  }],
-  "system": "<§7 프롬프트>"
-}
+**백엔드를 Gemini로 정했다 (2026-09-02).** 원래 Claude Opus 5로 설계했으나,
+Claude.ai 구독은 API 크레딧을 별도로 안 주고(콘솔에서 따로 결제 등록 필요)
+Gemini로 먼저 실측이 나와서 그쪽으로 전환했다. §2 스키마·§7 프롬프트는
+그대로다 — 바뀐 건 호출부뿐이다.
+
+```python
+from google import genai
+from google.genai import types
+
+client = genai.Client()  # GEMINI_API_KEY 환경변수를 읽는다
+
+response = client.models.generate_content(
+    model="gemini-3.6-flash",
+    contents=[
+        types.Part.from_bytes(data=image_bytes, mime_type="image/jpeg"),
+        "이 책상 사진을 분석하라.",
+    ],
+    config=types.GenerateContentConfig(
+        system_instruction="<§7 프롬프트>",
+        response_mime_type="application/json",
+        response_json_schema=gemini_schema,  # §2 스키마 + const→enum 변환. 아래 참조
+        max_output_tokens=16000,
+    ),
+)
 ```
+
+구현은 `tools/parse_scene.py`. `google-genai` 2.21.0을 실제로 설치해 API를
+직접 확인하고 썼다 (추측 아님) — Client 생성자, `generate_content` 시그니처,
+`Part.from_bytes`, `GenerateContentConfig`/`GenerateContentResponse`의 필드
+전부. **다만 실제 네트워크 호출까지 가본 건 아니다.** 로컬에서 만들 수 있는
+데까지(스키마 변환, `GenerateContentConfig` 생성, 이미지 `Part` 생성)는
+SDK 자체 검증을 통과했지만, 서버가 실제로 어떻게 응답하는지는 미확인.
 
 메모:
 
-- **모델**: `claude-opus-5`. 구조화 출력과 비전을 모두 지원한다. 파싱 정확도가
-  곧 명명 완주율(성공 판정 1번)이므로 여기서 모델을 낮추지 않는다.
-- **thinking**: Opus 5는 기본으로 적응형 사고가 켜져 있다. 별도 설정하지 않는다.
-- **첫 호출 지연**: 새 스키마는 1회 컴파일 비용이 붙고 이후 24시간 캐시된다.
-  스키마를 자주 바꾸면 매번 느려지므로 검증 중에는 감안한다.
-- **`stop_reason`**: `max_tokens`면 JSON이 잘려 있을 수 있다. 항목이 많은
-  책상에서 나올 수 있으므로 파싱 실패를 이 경우와 구분해 처리한다.
-- **비용**: 장면당 $0.2~0.3으로 잡는다. 이미지만 약 2,458 토큰이고(§15 실측)
-  여기에 스키마와 프롬프트, 그리고 적응형 사고의 출력 토큰이 붙는다.
-  주 1회 촬영이면 무시할 수준이다.
-- **Swift에는 공식 Anthropic SDK가 없다.** iOS 네이티브로 가더라도 이 호출은
+- **모델**: `gemini-3.6-flash`. 사용자가 이 모델로 실제 desk1 사진 하나를
+  테스트해 §9 지표 다섯 개(재현율·라벨 정확도·bbox 합격률·허위 항목·unknown
+  비율) 전부 합격선을 넘겼다 — 단, `tools/parse_scene.py`를 거치지 않고
+  다른 방식으로 테스트한 결과라 이 스크립트·스키마 그대로 재현되는지는
+  아직 확인 전이다.
+- **스키마 변환이 필요한 이유**: Gemini의 `response_schema` 필드는 OpenAPI 3.0
+  서브셋이라 `$ref`/`$defs`/`const` 등을 못 받는다. 대신 `response_json_schema`
+  필드는 실제 JSON Schema를 받고 `$id`/`$defs`/`$ref`/`$anchor`/`anyOf` 등을
+  지원한다 — §2 스키마의 `$ref`(bbox, category)와 `anyOf`(member_of의 nullable
+  표현)는 그대로 넘어간다. 유일하게 안 맞는 게 `const`(schema_version 필드)라
+  `to_gemini_schema()`가 그것만 `enum` 하나짜리로 바꾼다.
+- **첫 호출 지연**: Claude와 달리 스키마 컴파일 캐시 여부는 확인하지 못했다.
+- **`finish_reason`**: `MAX_TOKENS`면 JSON이 잘려 있을 수 있다. `SAFETY` /
+  `PROHIBITED_CONTENT` 등이면 응답이 아예 없을 수 있어 별도로 처리한다
+  (`resp.prompt_feedback.block_reason`도 함께 확인 — 입력 자체가 막히는 경우).
+- **비용**: 미확인. Claude 기준(§15)으로 잡았던 장면당 $0.2~0.3은 더 이상
+  근거가 아니다 — Gemini Flash 계열 요금은 따로 확인 필요.
+- **Swift에는 공식 Gemini SDK가 없다.** iOS 네이티브로 가더라도 이 호출은
   백엔드를 경유하는 게 맞다 — 앱에 API 키를 심을 수 없다. 누끼(Vision)는
-  온디바이스, 장면 파싱은 서버로 갈린다.
+  온디바이스, 장면 파싱은 서버로 갈린다. 이 판단 자체는 모델 선택과 무관하게
+  그대로 유지된다.
 
 ## 9. 검증 절차
 
@@ -621,9 +642,11 @@ D에는 촬영자의 신발과 발이 찍혔다. 위에서 찍으면 책상 아�
 내보내기(PNG 저장)까지가 v0 범위이므로 기록해둔다. 인쇄된 라벨·명찰과 사람은
 화면과 별개의 블러 대상이다.
 
-## 15. 비용 재추정
+## 15. 비용 재추정 (Claude 기준 — 참고용, §8에서 Gemini로 전환됨)
 
-D와 C2를 §5의 전처리에 실제로 통과시킨 결과다.
+D와 C2를 §5의 전처리에 실제로 통과시킨 결과다. 이미지 토큰 실측치는
+백엔드와 무관하게 여전히 유효하다(같은 JPEG 바이트를 보내니까). 달러
+추정치만 Claude Opus 5 기준이라 지금은 참고용 — Gemini 요금은 별도 확인 필요.
 
 | | 값 |
 |---|---|
@@ -639,9 +662,12 @@ Opus 5의 적응형 사고가 켜져 있어 사고 토큰이 얼마나 붙을지
 
 ## 16. 아직 없는 것
 
-- **정답 목록.** 재현율과 라벨 정확도는 사용자가 만든 정답 목록 없이는 못 잰다.
-  물건의 진짜 이름은 소유자만 안다. `tools/parse_scene.py`가 뽑는
-  `*.items.csv`의 `hit` 열을 채우면 된다.
-- **API 호출.** 이 세션에 `ANTHROPIC_API_KEY`가 없다. §9의 지표는 한 줄도
-  측정되지 않았고, 위 관측은 전부 육안이다.
+- **`tools/parse_scene.py`로 재현한 실측.** desk1(사무실 책상) 사진 한 장을
+  다른 방식으로 Gemini에 넣어봤더니 §9 지표 다섯 개(매칭 정확도 제외)가 전부
+  합격선을 넘었다. 좋은 신호지만, 이 스크립트·이 스키마·이 프롬프트 그대로
+  돌린 결과가 아니라서 "설계한 계약이 실제로 동작한다"는 확인은 아직 아니다.
+  이 세션엔 `GEMINI_API_KEY`가 없어 직접 돌려보지 못했다.
+- **매칭 정확도.** 같은 책상을 두 번 찍은 쌍(C→C2 같은)으로 재는 지표인데,
+  desk1 결과는 한 장짜리라 여기 해당 없음.
+- **안정성.** 같은 사진 2회 호출 시 항목 수 편차. 아직 미측정.
 - A·B(카페)의 원본 파일. 대화로만 들어와 디스크에 없다. C2·D만 파일이 있다.

@@ -21,9 +21,12 @@
 
 남은 선행 작업 둘 다 실물 사진이 필요하다.
 
-1. 누끼 손검증 — 물건 10개로 카드 톤 확인
-2. 장면 파싱 검증 — 책상 사진 4장으로 `docs/scene-schema.md`의 합격선 측정
-   (스키마·도구는 되어 있고, 측정만 남았다. `ANTHROPIC_API_KEY`와 사진 필요)
+1. 누끼 손검증 — 물건 10개로 카드 톤 확인. 미착수
+2. 장면 파싱 검증 — 책상 사진으로 `docs/scene-schema.md`의 합격선 측정.
+   백엔드는 **Gemini**로 전환 (Claude 구독은 API 크레딧을 별도로 안 줘서).
+   사진 한 장(desk1)을 다른 방식으로 테스트해 지표 다섯 개는 이미 합격선을
+   넘었다 — `tools/parse_scene.py`로 재현하는 것과 매칭 정확도·안정성
+   측정이 남았다. `GEMINI_API_KEY`가 있으면 바로 돌릴 수 있다
 3. **데이터 모델 + 명명 스와이프 — 코드 작성 완료, 컴파일 미검증.** `ios/`
    참조. 1·2번과 독립적으로 진행했다 (노드가 이미 있다고 가정하고 저장·
    명명만 다룬다. 장면 촬영 → 노드 생성 파이프라인은 아직 없다)
@@ -42,8 +45,8 @@
 ## 장면 파싱 검증 돌리기
 
 ```sh
-pip install anthropic pillow
-export ANTHROPIC_API_KEY=...
+pip install google-genai pillow
+export GEMINI_API_KEY=...
 
 python3 tools/parse_scene.py photos/*.jpg --out runs/0902
 #   runs/0902/<이름>.raw.json   VLM 원본 응답
@@ -59,3 +62,9 @@ python3 tools/score.py runs/0902/*.items.csv
 
 스키마와 프롬프트는 `docs/scene-schema.md`에서 직접 읽으므로, 고칠 때는 문서만
 고치면 된다. 합격선은 같은 문서 §9에 있고 `tools/score.py`가 그 값으로 판정한다.
+
+`tools/parse_scene.py`의 Gemini 호출부는 실제 `google-genai` 2.21.0을 설치해
+API를 확인하고 썼지만, 이 환경에 `GEMINI_API_KEY`가 없어 **실제 네트워크
+호출까지는 못 가봤다.** 스키마 변환·설정 객체 생성까지는 SDK 자체 검증을
+통과했다. 처음 돌릴 때 에러가 나면 알려주시면 그걸 근거로 고친다.
+`docs/scene-schema.md` §8에 세부 사항.
