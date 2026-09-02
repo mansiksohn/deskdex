@@ -17,3 +17,5 @@ o,o,item_12,object,"맥세이프 충전 거치대",0.85,cable_power,warm,desk,0.
 o,o,item_13,object,"우주 그림책",0.90,book,cold,vertical,0.90,""
 n,o,item_14,object,"소형 탁상시계",0.70,device,warm,desk,0.80,""
 # 놓친 물건은 아래에 이렇게: miss,,,,"나무 주걱",,,,,,
+# item_14 실제 정답 (사용자 확인, 2026-09-02): 뽀모도로 타이머. "소형 탁상시계"는
+# 모양은 맞게 봤으나 용도를 잘못 짚은 오분류 — hit=n(실재하나 이름틀림) 그대로 둔다.
