@@ -21,3 +21,24 @@
 
 1. 누끼 손검증 — 물건 10개로 카드 톤 확인
 2. 장면 파싱 검증 — 책상 사진 4장으로 `docs/scene-schema.md`의 합격선 측정
+
+## 장면 파싱 검증 돌리기
+
+```sh
+pip install anthropic pillow
+export ANTHROPIC_API_KEY=...
+
+python3 tools/parse_scene.py photos/*.jpg --out runs/0902
+#   runs/0902/<이름>.raw.json   VLM 원본 응답
+#   runs/0902/<이름>.items.csv  정답 대조용
+#   runs/0902/summary.txt       항목 수, 버린 것, 토큰
+
+# items.csv 의 hit / crop 열을 손으로 채운다
+#   hit   o=맞음  n=실재하나 이름틀림  x=허위  miss=놓침(행을 직접 추가)
+#   crop  o=크롭해서 알아볼 수 있다  x=없다
+
+python3 tools/score.py runs/0902/*.items.csv
+```
+
+스키마와 프롬프트는 `docs/scene-schema.md`에서 직접 읽으므로, 고칠 때는 문서만
+고치면 된다. 합격선은 같은 문서 §9에 있고 `tools/score.py`가 그 값으로 판정한다.

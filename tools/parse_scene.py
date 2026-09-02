@@ -131,15 +131,20 @@ def main():
         silhouette = sum(1 for i in kept if i["crop_quality"] < 0.45
                          or i["occlusion"] > 0.60)
 
-        # 정답 대조용. hit 열을 사람이 채운다: o=맞음 x=허위 n=이름틀림
-        rows = ["hit,id,kind,label,confidence,category,zone,support,crop_quality,features"]
+        rows = [
+            "# hit  : o=맞음(실재+이름OK) n=실재하나 이름틀림 x=허위(그런 물건 없다)",
+            "#        모델이 통째로 놓친 물건은 맨 아래에 hit=miss로 행을 추가한다",
+            "# crop : 이 물건 사진을 잘라서 카드에 띄웠을 때 알아볼 수 있나. o/x",
+            "hit,crop,id,kind,label,confidence,category,zone,support,crop_quality,features",
+        ]
         for i in kept:
-            rows.append(",".join(['', i["id"], i["kind"],
+            rows.append(",".join(['', '', i["id"], i["kind"],
                                   '"%s"' % i["label"].replace('"', "'"),
                                   f'{i["label_confidence"]:.2f}', i["category"],
                                   i["zone"], i["support"],
                                   f'{i["crop_quality"]:.2f}',
                                   '"%s"' % i["distinguishing_features"].replace('"', "'")]))
+        rows.append("# 놓친 물건은 아래에 이렇게: miss,,,,\"나무 주걱\",,,,,,")
         (out / f"{name}.items.csv").write_text("\n".join(rows) + "\n", encoding="utf-8")
 
         lines += [
