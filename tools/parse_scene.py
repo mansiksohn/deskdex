@@ -94,6 +94,8 @@ def postprocess(scene):
             dropped.append((it, "bbox 뒤집힘")); continue
         if any(overlap_ratio(b, r["bbox"]) >= 0.70 for r in scene["screen_regions"]):
             dropped.append((it, "화면 영역")); continue
+        if it["support"] == "off_desk":
+            dropped.append((it, "책상 아님")); continue
         if it["support"] == "unknown" and not center_in(b, scene["surface"]["bbox"]):
             dropped.append((it, "상판 밖")); continue
 
