@@ -1,0 +1,14 @@
+# hit  : o=맞음(실재+이름OK) n=실재하나 이름틀림 x=허위(그런 물건 없다)
+#        모델이 통째로 놓친 물건은 맨 아래에 hit=miss로 행을 추가한다
+# crop : 이 물건 사진을 잘라서 카드에 띄웠을 때 알아볼 수 있나. o/x
+hit,crop,id,kind,label,confidence,category,zone,support,crop_quality,features
+o,o,item_01,object,"레노버 노트북",0.95,device,hot,desk,0.92,""
+o,o,item_02,object,"검은색 와이드 모니터",0.98,display,hot,desk,0.95,""
+o,o,item_03,object,"검은색 기계식 키보드",0.95,input,hot,desk,0.95,""
+o,o,item_04,object,"민트색 주전자",0.95,drinkware,hot,desk,0.90,""
+o,o,item_05,object,"흰색 머그잔",0.90,drinkware,hot,desk,0.90,""
+o,o,item_06,object,"드립 커피 드리퍼",0.90,drinkware,hot,desk,0.88,""
+o,o,item_07,object,"검은색 가방",0.85,carry,cold,off_desk,0.80,""
+o,o,item_08,cluster,"연필꽂이 및 도구모음",0.85,writing,hot,desk,0.70,""
+o,o,item_09,cluster,"우측 서류 및 책 뭉치",0.80,book,warm,desk,0.75,""
+# 놓친 물건은 아래에 이렇게: miss,,,,"나무 주걱",,,,,,

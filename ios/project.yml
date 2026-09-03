@@ -1,0 +1,40 @@
+# XcodeGen 스펙. `xcodegen generate`로 DeskDex.xcodeproj를 만든다.
+# xcodegen이 없으면 ios/README.md의 수동 절차(Xcode에서 새 프로젝트 만들고
+# 이 폴더를 끌어넣기)를 대신 쓴다 — 둘 다 같은 소스를 가리킨다.
+name: DeskDex
+options:
+  bundleIdPrefix: com.deskdex
+  deploymentTarget:
+    iOS: "17.0"
+
+packages:
+  DeskDexKit:
+    path: DeskDexKit
+
+targets:
+  DeskDex:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: App
+    dependencies:
+      - package: DeskDexKit
+    info:
+      path: App/Info.plist
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.deskdex.app
+        SWIFT_VERSION: "5.0"
+        TARGETED_DEVICE_FAMILY: "1"
+        GENERATE_INFOPLIST_FILE: NO
+
+schemes:
+  DeskDex:
+    build:
+      targets:
+        DeskDex: all
+    run:
+      config: Debug
+    test:
+      config: Debug

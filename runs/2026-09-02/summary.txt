@@ -1,0 +1,12 @@
+[C2-office-frontal-0902]
+  각도 oblique  상판비율 0.45  이슈 []
+  화면영역 2  파싱불가영역 2
+  항목 14 → 유지 14 / 버림 0
+  unknown 0 (0%)  needs_input 0  실루엣행 0
+
+[D-office-topdown-0902]
+  각도 top_down  상판비율 0.65  이슈 []
+  화면영역 2  파싱불가영역 0
+  항목 9 → 유지 8 / 버림 1
+    버림: 검은색 가방 (책상 아님)
+  unknown 0 (0%)  needs_input 0  실루엣행 0

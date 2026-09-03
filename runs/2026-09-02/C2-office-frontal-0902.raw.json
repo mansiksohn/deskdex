@@ -1,0 +1,442 @@
+{
+  "schema_version": "scene.v1",
+  "surface": {
+    "bbox": {
+      "x0": 0.0,
+      "y0": 0.58,
+      "x1": 1.0,
+      "y1": 1.0
+    },
+    "confidence": 0.95
+  },
+  "screen_regions": [
+    {
+      "bbox": {
+        "x0": 0.128,
+        "y0": 0.187,
+        "x1": 0.606,
+        "y1": 0.553
+      },
+      "kind": "monitor",
+      "confidence": 0.98
+    },
+    {
+      "bbox": {
+        "x0": 0.643,
+        "y0": 0.185,
+        "x1": 0.978,
+        "y1": 0.47
+      },
+      "kind": "laptop",
+      "confidence": 0.98
+    }
+  ],
+  "capture_quality": {
+    "angle": "oblique",
+    "surface_ratio": 0.45,
+    "position_confidence": 0.95,
+    "issues": []
+  },
+  "items": [
+    {
+      "id": "item_1",
+      "kind": "object",
+      "member_of": null,
+      "label": "레노버 노트북",
+      "label_confidence": 0.98,
+      "category": "device",
+      "distinguishing_features": "Lenovo 각인, 우측 하단 미디에젠 스티커",
+      "bbox": {
+        "x0": 0.589,
+        "y0": 0.183,
+        "x1": 0.978,
+        "y1": 0.698
+      },
+      "crop_quality": 0.95,
+      "occlusion": 0.0,
+      "zone": "warm",
+      "support": "raised",
+      "sediment": {
+        "candidate": false,
+        "signals": [],
+        "confidence": 0.0
+      },
+      "member_count": 1,
+      "splittable": false,
+      "activity": ""
+    },
+    {
+      "id": "item_2",
+      "kind": "object",
+      "member_of": null,
+      "label": "노트북 거치대",
+      "label_confidence": 0.9,
+      "category": "storage",
+      "distinguishing_features": "검은색 메탈 거치대",
+      "bbox": {
+        "x0": 0.627,
+        "y0": 0.612,
+        "x1": 0.916,
+        "y1": 0.725
+      },
+      "crop_quality": 0.8,
+      "occlusion": 0.5,
+      "zone": "warm",
+      "support": "desk",
+      "sediment": {
+        "candidate": false,
+        "signals": [],
+        "confidence": 0.0
+      },
+      "member_count": 1,
+      "splittable": false,
+      "activity": ""
+    },
+    {
+      "id": "item_3",
+      "kind": "object",
+      "member_of": null,
+      "label": "와이드 모니터",
+      "label_confidence": 0.95,
+      "category": "display",
+      "distinguishing_features": "하단 중앙 미디에젠 스티커",
+      "bbox": {
+        "x0": 0.125,
+        "y0": 0.185,
+        "x1": 0.608,
+        "y1": 0.58
+      },
+      "crop_quality": 0.95,
+      "occlusion": 0.0,
+      "zone": "cold",
+      "support": "desk",
+      "sediment": {
+        "candidate": false,
+        "signals": [],
+        "confidence": 0.0
+      },
+      "member_count": 1,
+      "splittable": false,
+      "activity": ""
+    },
+    {
+      "id": "item_4",
+      "kind": "object",
+      "member_of": null,
+      "label": "무선 키보드",
+      "label_confidence": 0.92,
+      "category": "input",
+      "distinguishing_features": "좌상단 민트색, 우상단 주황색 포인트 키캡",
+      "bbox": {
+        "x0": 0.378,
+        "y0": 0.71,
+        "x1": 0.638,
+        "y1": 0.814
+      },
+      "crop_quality": 0.95,
+      "occlusion": 0.0,
+      "zone": "hot",
+      "support": "desk",
+      "sediment": {
+        "candidate": false,
+        "signals": [],
+        "confidence": 0.0
+      },
+      "member_count": 1,
+      "splittable": false,
+      "activity": ""
+    },
+    {
+      "id": "item_5",
+      "kind": "object",
+      "member_of": null,
+      "label": "버티컬 마우스",
+      "label_confidence": 0.95,
+      "category": "input",
+      "distinguishing_features": "검은색 인체공학 마우스",
+      "bbox": {
+        "x0": 0.649,
+        "y0": 0.708,
+        "x1": 0.717,
+        "y1": 0.817
+      },
+      "crop_quality": 0.9,
+      "occlusion": 0.0,
+      "zone": "hot",
+      "support": "desk",
+      "sediment": {
+        "candidate": false,
+        "signals": [],
+        "confidence": 0.0
+      },
+      "member_count": 1,
+      "splittable": false,
+      "activity": ""
+    },
+    {
+      "id": "item_6",
+      "kind": "object",
+      "member_of": null,
+      "label": "가죽 마우스패드",
+      "label_confidence": 0.9,
+      "category": "input",
+      "distinguishing_features": "갈색 가죽 재질, 하단 각인",
+      "bbox": {
+        "x0": 0.63,
+        "y0": 0.738,
+        "x1": 0.809,
+        "y1": 0.867
+      },
+      "crop_quality": 0.9,
+      "occlusion": 0.2,
+      "zone": "hot",
+      "support": "desk",
+      "sediment": {
+        "candidate": false,
+        "signals": [],
+        "confidence": 0.0
+      },
+      "member_count": 1,
+      "splittable": false,
+      "activity": ""
+    },
+    {
+      "id": "item_7",
+      "kind": "object",
+      "member_of": null,
+      "label": "흰색 머그컵",
+      "label_confidence": 0.95,
+      "category": "drinkware",
+      "distinguishing_features": "Coffee 문구 스티커 붙음",
+      "bbox": {
+        "x0": 0.123,
+        "y0": 0.756,
+        "x1": 0.245,
+        "y1": 0.923
+      },
+      "crop_quality": 0.95,
+      "occlusion": 0.0,
+      "zone": "hot",
+      "support": "desk",
+      "sediment": {
+        "candidate": false,
+        "signals": [],
+        "confidence": 0.0
+      },
+      "member_count": 1,
+      "splittable": false,
+      "activity": ""
+    },
+    {
+      "id": "item_8",
+      "kind": "object",
+      "member_of": null,
+      "label": "패브릭 코스터",
+      "label_confidence": 0.85,
+      "category": "decor",
+      "distinguishing_features": "카펫 패턴 디자인",
+      "bbox": {
+        "x0": 0.101,
+        "y0": 0.849,
+        "x1": 0.28,
+        "y1": 0.925
+      },
+      "crop_quality": 0.85,
+      "occlusion": 0.3,
+      "zone": "hot",
+      "support": "desk",
+      "sediment": {
+        "candidate": false,
+        "signals": [],
+        "confidence": 0.0
+      },
+      "member_count": 1,
+      "splittable": false,
+      "activity": ""
+    },
+    {
+      "id": "item_9",
+      "kind": "object",
+      "member_of": null,
+      "label": "민트색 티팟",
+      "label_confidence": 0.95,
+      "category": "drinkware",
+      "distinguishing_features": "민트색 도자기, 갈색 손잡이/손잡이 부분",
+      "bbox": {
+        "x0": 0.231,
+        "y0": 0.678,
+        "x1": 0.337,
+        "y1": 0.826
+      },
+      "crop_quality": 0.95,
+      "occlusion": 0.0,
+      "zone": "warm",
+      "support": "desk",
+      "sediment": {
+        "candidate": false,
+        "signals": [],
+        "confidence": 0.0
+      },
+      "member_count": 1,
+      "splittable": false,
+      "activity": ""
+    },
+    {
+      "id": "item_10",
+      "kind": "object",
+      "member_of": null,
+      "label": "커피 드리퍼 세트",
+      "label_confidence": 0.9,
+      "category": "drinkware",
+      "distinguishing_features": "유리 서버 위 스텐/유리 드리퍼, 종이 필터",
+      "bbox": {
+        "x0": 0.036,
+        "y0": 0.608,
+        "x1": 0.155,
+        "y1": 0.836
+      },
+      "crop_quality": 0.9,
+      "occlusion": 0.0,
+      "zone": "hot",
+      "support": "desk",
+      "sediment": {
+        "candidate": false,
+        "signals": [],
+        "confidence": 0.0
+      },
+      "member_count": 1,
+      "splittable": false,
+      "activity": ""
+    },
+    {
+      "id": "item_11",
+      "kind": "object",
+      "member_of": null,
+      "label": "흰색 멀티탭",
+      "label_confidence": 0.95,
+      "category": "cable_power",
+      "distinguishing_features": "4구 멀티탭, 어댑터 꽂힘",
+      "bbox": {
+        "x0": 0.242,
+        "y0": 0.589,
+        "x1": 0.42,
+        "y1": 0.634
+      },
+      "crop_quality": 0.85,
+      "occlusion": 0.2,
+      "zone": "cold",
+      "support": "desk",
+      "sediment": {
+        "candidate": false,
+        "signals": [],
+        "confidence": 0.0
+      },
+      "member_count": 1,
+      "splittable": false,
+      "activity": ""
+    },
+    {
+      "id": "item_12",
+      "kind": "object",
+      "member_of": null,
+      "label": "맥세이프 충전 거치대",
+      "label_confidence": 0.88,
+      "category": "cable_power",
+      "distinguishing_features": "흰색 원형 충전 패드",
+      "bbox": {
+        "x0": 0.457,
+        "y0": 0.603,
+        "x1": 0.503,
+        "y1": 0.708
+      },
+      "crop_quality": 0.9,
+      "occlusion": 0.0,
+      "zone": "warm",
+      "support": "desk",
+      "sediment": {
+        "candidate": false,
+        "signals": [],
+        "confidence": 0.0
+      },
+      "member_count": 1,
+      "splittable": false,
+      "activity": ""
+    },
+    {
+      "id": "item_13",
+      "kind": "object",
+      "member_of": null,
+      "label": "우주 그림책",
+      "label_confidence": 0.85,
+      "category": "book",
+      "distinguishing_features": "SPACE 글씨, 우주 일러스트 표지",
+      "bbox": {
+        "x0": 0.037,
+        "y0": 0.408,
+        "x1": 0.237,
+        "y1": 0.665
+      },
+      "crop_quality": 0.9,
+      "occlusion": 0.1,
+      "zone": "cold",
+      "support": "desk",
+      "sediment": {
+        "candidate": false,
+        "signals": [],
+        "confidence": 0.0
+      },
+      "member_count": 1,
+      "splittable": false,
+      "activity": ""
+    },
+    {
+      "id": "item_14",
+      "kind": "object",
+      "member_of": null,
+      "label": "소형 탁상시계",
+      "label_confidence": 0.8,
+      "category": "device",
+      "distinguishing_features": "초록색 테두리, 사각형",
+      "bbox": {
+        "x0": 0.528,
+        "y0": 0.62,
+        "x1": 0.573,
+        "y1": 0.69
+      },
+      "crop_quality": 0.8,
+      "occlusion": 0.1,
+      "zone": "warm",
+      "support": "desk",
+      "sediment": {
+        "candidate": false,
+        "signals": [],
+        "confidence": 0.0
+      },
+      "member_count": 1,
+      "splittable": false,
+      "activity": ""
+    }
+  ],
+  "unparsed_regions": [
+    {
+      "bbox": {
+        "x0": 0.0,
+        "y0": 0.48,
+        "x1": 0.045,
+        "y1": 0.77
+      },
+      "reason": "unidentifiable",
+      "estimated_count": 3
+    },
+    {
+      "bbox": {
+        "x0": 0.55,
+        "y0": 0.53,
+        "x1": 0.63,
+        "y1": 0.71
+      },
+      "reason": "too_cluttered",
+      "estimated_count": 4
+    }
+  ]
+}

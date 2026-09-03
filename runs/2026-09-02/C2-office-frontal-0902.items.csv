@@ -1,0 +1,21 @@
+# hit  : o=맞음(실재+이름OK) n=실재하나 이름틀림 x=허위(그런 물건 없다)
+#        모델이 통째로 놓친 물건은 맨 아래에 hit=miss로 행을 추가한다
+# crop : 이 물건 사진을 잘라서 카드에 띄웠을 때 알아볼 수 있나. o/x
+hit,crop,id,kind,label,confidence,category,zone,support,crop_quality,features
+o,o,item_1,object,"레노버 노트북",0.95,device,hot,raised,0.95,""
+o,o,item_2,object,"노트북 거치대",0.90,storage,hot,desk,0.80,""
+o,o,item_3,object,"와이드 모니터",0.98,display,hot,desk,0.95,""
+o,o,item_4,object,"무선 키보드",0.90,input,hot,desk,0.95,""
+o,o,item_5,object,"버티컬 마우스",0.90,input,hot,desk,0.90,""
+o,o,item_6,object,"가죽 마우스패드",0.90,input,hot,desk,0.90,""
+o,o,item_7,object,"흰색 머그컵",0.95,drinkware,hot,desk,0.95,""
+o,o,item_8,object,"패브릭 코스터",0.80,decor,hot,desk,0.85,""
+o,o,item_9,object,"민트색 티팟",0.95,drinkware,hot,desk,0.95,""
+o,o,item_10,object,"커피 드리퍼 세트",0.90,drinkware,hot,desk,0.90,""
+o,o,item_11,object,"흰색 멀티탭",0.90,cable_power,warm,desk,0.85,""
+o,o,item_12,object,"맥세이프 충전 거치대",0.85,cable_power,warm,desk,0.90,""
+o,o,item_13,object,"우주 그림책",0.90,book,cold,vertical,0.90,""
+n,o,item_14,object,"소형 탁상시계",0.70,device,warm,desk,0.80,""
+# 놓친 물건은 아래에 이렇게: miss,,,,"나무 주걱",,,,,,
+# item_14 실제 정답 (사용자 확인, 2026-09-02): 뽀모도로 타이머. "소형 탁상시계"는
+# 모양은 맞게 봤으나 용도를 잘못 짚은 오분류 — hit=n(실재하나 이름틀림) 그대로 둔다.

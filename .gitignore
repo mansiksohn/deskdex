@@ -21,3 +21,12 @@ __pycache__/
 
 # 실험용 사진 / 누끼 손검증 산출물
 scratch/
+
+# iOS / Swift — xcodegen이 만드는 산출물, 사용자별 상태는 커밋하지 않는다
+ios/*.xcodeproj/
+ios/DeskDexKit/.build/
+ios/DeskDexKit/.swiftpm/
+.build/
+DerivedData/
+xcuserdata/
+*.xcuserstate
