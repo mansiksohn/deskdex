@@ -15,8 +15,8 @@ final class NamingQueueTests: XCTestCase {
              category: .unknown, needsInput: needsInput)
     }
 
-    // MARK: 정렬 — needs_input 먼저, 그다음 미룬 적 없는 것, 마지막이 미룬 것.
-    // 각 구간 안에서는 dexNo 오름차순. docs/design.md "명명 스와이프".
+    // MARK: 정렬 — 미룬 적 없는 것 먼저, 미룬 것은 맨 뒤(needs_input이어도).
+    // 각 구간 안에서는 needs_input 먼저, 그다음 dexNo 오름차순. docs/design.md "명명 스와이프".
 
     func testOrdering_needsInputFirst() {
         let a = node(dexNo: 1, needsInput: false)

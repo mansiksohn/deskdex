@@ -1,9 +1,7 @@
 import Foundation
 
 /// 명명 스와이프의 순수 로직. SwiftUI나 영속화에 대한 의존이 없어 유닛 테스트로
-/// 검증할 수 있다 (`Tests/DeskDexKitTests/NamingQueueTests.swift`). 이 저장소를
-/// 만든 환경에는 Swift 툴체인이 없어 이 파일 자체는 컴파일해보지 못했다 —
-/// `ios/README.md`의 "검증 상태" 참조.
+/// 검증할 수 있다 (`Tests/DeskDexKitTests/NamingQueueTests.swift`, CI에서 `swift test`).
 ///
 /// `docs/design.md` "2. 명명 스와이프"의 규칙을 그대로 코드로 옮겼다.
 ///   - `needs_input` 항목을 앞에 배치
@@ -23,17 +21,18 @@ public struct NamingQueue {
     ///   `labelStatus != .confirmed`인 노드만 넘긴다 — 필터링은 저장소 조회
     ///   쪽 책임이고, 이 이니셜라이저는 순서만 정한다.
     ///
-    /// 정렬 순서: needs_input 항목 먼저, 그다음 나중에로 미룬 적 없는 항목,
-    /// 마지막이 미룬 항목. 각 구간 안에서는 `dexNo`(발견 순서) 오름차순.
+    /// 정렬 순서: 미룬 적 없는 항목이 먼저, 미룬 항목은 맨 뒤(needs_input이어도).
+    /// 각 구간 안에서는 needs_input 항목 먼저, 그다음 `dexNo`(발견 순서) 오름차순.
     /// 미룬 항목을 맨 뒤로 두는 것은 design.md가 명시하지 않은 이 구현의
     /// 결정이다 — "미룬 항목은 뒤로 밀리되 없어지지 않는다"(`docs/design.md`
     /// "`label_status`가 필요한 이유")를 앱을 다시 켰을 때도 지키기 위함.
     public init(candidates: [Node]) {
         queue = candidates.sorted { a, b in
-            if a.needsInput != b.needsInput { return a.needsInput && !b.needsInput }
+            // 미룬 여부를 needs_input보다 먼저 본다 — 미룬 항목은 needs_input이어도 맨 뒤.
             let aDeferred = a.labelStatus == .deferred
             let bDeferred = b.labelStatus == .deferred
-            if aDeferred != bDeferred { return bDeferred } // 미룬 쪽이 뒤로
+            if aDeferred != bDeferred { return bDeferred }
+            if a.needsInput != b.needsInput { return a.needsInput }
             return a.dexNo < b.dexNo
         }
     }

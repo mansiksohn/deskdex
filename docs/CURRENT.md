@@ -17,7 +17,7 @@
 |---|---|---|
 | 1 | 누끼 손검증 — 물건 10개로 카드 톤 확인 | 미착수. 실물 사진 필요 |
 | 2 | 장면 파싱 프롬프트 + 스키마 고정 | 실측 1차 합격(§3). 매칭 정확도·안정성 측정이 남음 |
-| 3 | 데이터 모델 + 명명 스와이프 (`ios/`) | 코드 작성 완료. 컴파일 검증은 CI macOS 잡 도입으로 시작(§4) |
+| 3 | 데이터 모델 + 명명 스와이프 (`ios/`) | 코드 작성 완료. `DeskDexKit`은 CI에서 컴파일·테스트 통과(§4). 앱 화면은 미확인 |
 | 4 | 도감 화면 | 미착수 |
 | 5 | 검색 | 미착수 |
 | 6 | 그리드 내보내기 | 미착수 |
@@ -38,7 +38,7 @@
 | 위치 | 내용 | 검증 |
 |---|---|---|
 | `DeskDexKit/Sources/DeskDexKit/Domain/` | `Node`, `Scene`, `NamingQueue`, `BoundingBox`, `NodeCategory`. Foundation만 사용 | CI `swift test`(macOS) |
-| `DeskDexKit/Tests/` | `NamingQueueTests`, `NodeCodableTests` | CI `swift test`(macOS) |
+| `DeskDexKit/Tests/` | `NamingQueueTests`, `NodeCodableTests` (16개) | CI `swift test`(macOS·Linux 둘 다) |
 | `DeskDexKit/Sources/DeskDexKit/Persistence/` | SwiftData `@Model` | CI 컴파일만 |
 | `App/` | SwiftUI 명명 스와이프 화면, 샘플 데이터 자동 시드 | CI 시뮬레이터 빌드(컴파일만). 화면 동작은 맥의 Xcode에서 [ios/README.md](../ios/README.md) 체크리스트로 |
 
@@ -50,7 +50,7 @@
 
 - 주 작업 기기는 Windows(Swift 툴체인·Xcode 없음). 맥에서만 되는 일은 [AGENTS.md](../AGENTS.md) §4.
 - Python 3.13, `google-genai`, `pillow`, `python-dotenv`.
-- CI: GitHub Actions `.github/workflows/ci.yml` — `checks`(ubuntu: `tools/dod.sh`와 같은 검사),
+- CI: GitHub Actions `.github/workflows/ci.yml` — `checks`(ubuntu: `tools/dod.sh`. ubuntu 러너엔 Swift가 있어 `swift test`도 돈다. `Persistence/`는 `#if canImport(SwiftData)`로 빠진다),
   `ios`(macos: `swift test`, XcodeGen → 시뮬레이터 빌드). 공개 저장소라 macOS 러너도 무료.
 
 ## 6. 하지 않기로 한 것

@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  # tools/dod.sh와 같은 검사. Swift가 없는 러너라 swift test는 건너뛰고 아래 ios 잡이 맡는다.
+  # tools/dod.sh와 같은 검사. ubuntu 러너엔 Swift가 있어 도메인 로직 swift test도 여기서 돈다.
   checks:
     runs-on: ubuntu-latest
     steps:
