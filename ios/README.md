@@ -6,6 +6,10 @@
 
 ## 검증 상태 — 반드시 먼저 읽을 것
 
+> 2026-11-23부터 GitHub Actions `ios` 잡(macOS)이 `swift test`와 시뮬레이터 빌드를 돌린다.
+> 최신 결과는 저장소 Actions 탭, 현재 상태 요약은 [docs/CURRENT.md](../docs/CURRENT.md) §4.
+> 아래는 처음 작성 당시(2026-09-02)의 기록이다.
+
 **이 코드는 컴파일된 적이 없다.** 작성한 환경(Linux 컨테이너)에 Swift
 툴체인이 없고, `download.swift.org`가 프록시 정책으로 막혀 있어 설치도
 못 했다 (`curl`이 403). Xcode·iOS 시뮬레이터도 당연히 없다.

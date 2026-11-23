@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  # tools/dod.sh와 같은 검사. Swift가 없는 러너라 swift test는 건너뛰고 아래 ios 잡이 맡는다.
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: bash tools/dod.sh
+
+  # 주 작업 기기가 Windows라 Swift 컴파일·테스트는 여기서만 확인된다(AGENTS.md §4).
+  ios:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Xcode 버전
+        run: xcodebuild -version
+      - name: swift test (DeskDexKit, macOS 타깃)
+        working-directory: ios/DeskDexKit
+        run: swift test
+      - name: XcodeGen으로 프로젝트 생성
+        working-directory: ios
+        run: |
+          brew install xcodegen
+          xcodegen generate
+      - name: 앱 빌드 (iOS 시뮬레이터, 서명 없음)
+        working-directory: ios
+        run: |
+          xcodebuild build \
+            -project DeskDex.xcodeproj \
+            -scheme DeskDex \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO \
+            | tail -n 200
+          exit "${PIPESTATUS[0]}"

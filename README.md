@@ -2,8 +2,8 @@
 
 책상 위 물건을 기록하는 도구. 기록의 보상으로 도감과 공유 이미지를 준다.
 
-현재 단계: **데이터 모델 + 명명 스와이프 착수 (착수 순서 3번). 미검증 —
-아래 "iOS 코드 검증 상태" 참조.**
+지금 무엇이 되어 있고 무엇이 남았나: **[docs/CURRENT.md](docs/CURRENT.md)**.
+작업 규칙은 [AGENTS.md](AGENTS.md).
 
 - [docs/WHY.md](docs/WHY.md) — 왜 만드는가, 하지 않을 것, v0 성공 판정
 - [docs/design.md](docs/design.md) — v0 범위, 데이터 모델, 파이프라인, 화면
@@ -14,35 +14,15 @@
 
 장면 촬영 한 장 → VLM 파싱 → 노드 일괄 생성 → 명명 스와이프 → 도감 / 검색 / 그리드 내보내기.
 
-## 착수 순서
+## 개발 환경
 
-`docs/design.md` 하단 참조. 플랫폼은 **iOS 네이티브 우선**으로 결정했다
-(누끼는 온디바이스 Vision, 장면 파싱만 백엔드 경유).
+플랫폼은 iOS 네이티브(SwiftUI + SwiftData). 문서와 장면 파싱 도구(`tools/`)는
+어느 OS에서나 되고, Swift 컴파일·테스트는 GitHub Actions의 macOS 잡이 맡는다.
+화면 확인은 맥의 Xcode에서 — [ios/README.md](ios/README.md).
 
-남은 선행 작업 둘 다 실물 사진이 필요하다.
-
-1. 누끼 손검증 — 물건 10개로 카드 톤 확인. 미착수
-2. 장면 파싱 검증 — 책상 사진으로 `docs/scene-schema.md`의 합격선 측정.
-   백엔드는 **Gemini**(`gemini-3.6-flash`)로 전환. `tools/parse_scene.py`로
-   사무실 책상 사진 두 장(정면·top_down)을 실제로 돌려서 §9 지표 다섯 개
-   전부 합격선을 넘겼다(재현율 100%, 라벨 정확도 93~100%, bbox 합격률
-   100%, 허위 0, unknown 0%) — 결과는 `runs/2026-09-02/`, 세부는
-   `docs/scene-schema.md` §16. 실행 중에 진짜 버그도 하나 잡았다(모니터가
-   자기 화면으로 오인식돼 걸러지던 것). 남은 건 매칭 정확도·안정성 측정
-3. **데이터 모델 + 명명 스와이프 — 코드 작성 완료, 컴파일 미검증.** `ios/`
-   참조. 1·2번과 독립적으로 진행했다 (노드가 이미 있다고 가정하고 저장·
-   명명만 다룬다. 장면 촬영 → 노드 생성 파이프라인은 아직 없다)
-
-## iOS 코드 검증 상태
-
-이 코드를 쓴 환경(Linux 컨테이너)에는 Swift 툴체인도 Xcode도 없다. 그래서:
-
-- `ios/DeskDexKit/`의 도메인 로직(`Node`, `NamingQueue` 등)은 SwiftUI·
-  SwiftData 의존 없이 짜서 **`swift test`로 Xcode 없이 검증 가능**하다.
-  받으면 제일 먼저 이것부터 돌려본다.
-- SwiftData 영속화·SwiftUI 화면은 Xcode에서 열어봐야 확인된다.
-
-절차와 확인 체크리스트는 `ios/README.md`.
+```sh
+bash tools/dod.sh   # 작업 완료 확인(문서 lint, Python 도구, swift test)
+```
 
 ## 장면 파싱 검증 돌리기
 
