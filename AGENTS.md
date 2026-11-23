@@ -58,3 +58,4 @@ iOS 코드를 고쳤으면 push 후 CI의 `ios` 잡(`swift test` + 앱 시뮬레
 - Gemini `response_json_schema`는 `const`를 지원하지 않는다 → `to_gemini_schema`가 `enum` 하나짜리로 바꾼다. 스키마에 새 키워드를 쓰면 지원 목록(그 함수 docstring)부터 확인한다.
 - Windows 콘솔에서 `score.py` 등의 한글 출력이 깨지면 `PYTHONIOENCODING=utf-8`을 준다(`dod.sh`는 이미 준다).
 - SwiftData `@Model`과 SwiftUI는 Linux·Windows의 Swift로는 컴파일되지 않는다. 그래서 도메인 로직(`DeskDexKit/Sources/DeskDexKit/Domain/`)은 Foundation만 쓴다. 여기에 SwiftUI·SwiftData import를 넣지 않는다.
+- `DeskDexKit`의 `Scene`(촬영 장면)은 SwiftUI의 `Scene`과 이름이 같다. `import SwiftUI`와 `import DeskDexKit`을 함께 쓰는 파일에서는 `SwiftUI.Scene` / `DeskDexKit.Scene`으로 적는다(안 그러면 'Scene' is ambiguous로 앱 빌드가 실패한다).
