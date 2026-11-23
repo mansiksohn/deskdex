@@ -48,12 +48,15 @@
 
 ```sh
 pip install google-genai pillow
-export GEMINI_API_KEY=...
+export GEMINI_API_KEY=...   # 또는 루트 .env에 GEMINI_API_KEY=... (pip install python-dotenv)
 
 python3 tools/parse_scene.py photos/*.jpg --out runs/0902
 #   runs/0902/<이름>.raw.json   VLM 원본 응답
 #   runs/0902/<이름>.items.csv  정답 대조용
 #   runs/0902/summary.txt       항목 수, 버린 것, 토큰
+
+# crop 판정을 돕는 시각화: bbox 오버레이 + 물건별 크롭 + 카드 뷰어 HTML
+python3 tools/visualize_crops.py photos/<이름>.jpg runs/0902
 
 # items.csv 의 hit / crop 열을 손으로 채운다
 #   hit   o=맞음  n=실재하나 이름틀림  x=허위  miss=놓침(행을 직접 추가)
