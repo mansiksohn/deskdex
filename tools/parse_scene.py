@@ -5,7 +5,7 @@
 출처이고, 스크립트가 문서와 어긋날 수 없다.
 
   pip install google-genai pillow
-  export GEMINI_API_KEY=...
+  export GEMINI_API_KEY=...   # 또는 저장소 루트 .env에 적는다 (python-dotenv 필요)
   python3 tools/parse_scene.py photos/*.jpg --out runs/2026-09-02
 
 각 사진에 대해:
@@ -26,6 +26,14 @@ import argparse, io, json, os, pathlib, re, sys
 
 DOC = pathlib.Path(__file__).resolve().parent.parent / "docs" / "scene-schema.md"
 DEFAULT_MODEL = "gemini-3.6-flash"  # 사용자가 이 모델로 실제 desk1 테스트에 성공했다
+
+# 저장소 루트 .env가 있으면 읽는다. python-dotenv가 없거나 이미 환경변수가
+# 있으면 아무 일도 하지 않는다 (override=False).
+try:
+    from dotenv import load_dotenv
+    load_dotenv(DOC.parent.parent / ".env")
+except ImportError:
+    pass
 
 
 def load_contract():
